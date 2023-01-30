@@ -29,9 +29,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 //user (or admin check page)
 Route::get('/condition',[AuthController::class,'condition'])->name('condition');
 
-   //admin
+   //admin ,category
  Route::group(['prefix' =>'category','middleware'=>'admin_auth'],function(){
     Route::get('/listPage',[CategoryController::class,'listPage'])->name('admin#listPage');
+    Route::get('/page',[CategoryController::class,'categoryPage'])->name('admin#categoryPage');
+    Route::post('/page/create',[CategoryController::class,'categoryCreate'])->name('admin#categoryCreate');
  });
 
 
