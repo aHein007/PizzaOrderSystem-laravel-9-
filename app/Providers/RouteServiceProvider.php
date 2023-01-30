@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/condition';//when you login logout is done it method will work
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

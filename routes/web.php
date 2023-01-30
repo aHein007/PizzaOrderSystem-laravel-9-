@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +15,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//auth , login , logout
+Route::controller(AuthController::class)->group(function(){
+    Route::redirect('/','/loginPage');
+    Route::get('/loginPage','loginPage')->name('auth#loginPage');
+    Route::get('/registerPage','registerPage')->name('auth#registerPage');
+ });
+
+
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+
+//user (or admin check page)
+Route::get('/condition',[AuthController::class,'condition'])->name('condition');
+
+   //admin
+ Route::group(['prefix' =>'category','middleware'=>'admin_auth'],function(){
+    Route::get('/listPage',[CategoryController::class,'listPage'])->name('admin#listPage');
+ });
+
+
+ //user
+ Route::group(['prefix' => 'user','middleware' =>'user_auth'],function(){
+    Route::get('home',function(){
+        return view('myViews.user.home');
+    })->name('user#home');
+ });
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+
+
+
+
+
+
+
+
+
