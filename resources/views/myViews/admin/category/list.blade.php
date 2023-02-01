@@ -48,6 +48,15 @@
                 </div>
 
                 <div class="">
+                    @if (session('update'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{session('update')}}</strong> You should check in on some of Category list below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    @endif
+                </div>
+
+                <div class="">
                     @if (session('deleteCategory'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{session('deleteCategory')}}</strong> You should check in on some of Category list below.
@@ -71,7 +80,7 @@
                            @if (count($categoryData) != 0)
                                 @foreach ($categoryData as $data)
                                 <tr class="tr-shadow">
-                                    <td>{{$data->category_id}}</td>
+                                    <td>{{$data->id}}</td>
                                     <td>{{$data->name}}</td>
                                     <td>{{$data->created_at->format('j - F - Y')}}</td>
                                     <td>
@@ -79,23 +88,23 @@
                                     </td>
                                     <td>
                                         <div class="table-data-feature ">
-                                            <a href="" class="m-2">
+                                            <a href="{{route('admin#categoryUpdatePage',$data->id)}}" class="m-2">
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </a>
-                                            <form action="{{route('admin#categoryDelete',$data->category_id)}}" method="post" class="m-2">
+                                            <form action="{{route('admin#categoryDelete',$data->id)}}" method="post" class="m-2">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                             </form>
-                                           <a href="" class="m-2">
+                                           {{-- <a href="" class="m-2">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                                 <i class="zmdi zmdi-more"></i>
                                             </button>
-                                           </a>
+                                           </a> --}}
                                         </div>
                                     </td>
                                 </tr>
