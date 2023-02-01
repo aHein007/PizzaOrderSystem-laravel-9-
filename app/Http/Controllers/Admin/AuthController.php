@@ -22,7 +22,9 @@ class AuthController extends Controller
 
     public function condition(){
         if(Auth::user()->role == 'admin'){
-            return redirect()->route('admin#categoryListPage');
+
+            return redirect()->route('admin#categoryPage');
+            
         }else
         {
             return redirect()->route('user#home');

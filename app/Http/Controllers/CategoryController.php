@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    public function listPage(){
-       $categoryData = Category::orderBy('category_id','desc')->get();
+    public function listPage(Request $request){
+
+
+
+       $categoryData = Category::search($request->search)
+                                ->orderBy('category_id','desc')
+                                ->paginate(4);
+
+        $categoryData->appends($request->all());//this appends method is still work all(search & paginate) when data searching
 
 
 
@@ -32,8 +39,16 @@ class CategoryController extends Controller
 
         Category::create($data);
 
-        return redirect()->route('admin#listPage');
+        return redirect()->route('admin#listPage')->with('createCategory','Your category create have been successfully!');
     }
+
+    public function categoryDelete($id)
+    {
+        Category::where('category_id',$id)->delete();
+
+        return redirect()->route('admin#listPage')->with('deleteCategory','Your category had been delete!');
+    }
+
 
 
     public function categoryValidation($request)

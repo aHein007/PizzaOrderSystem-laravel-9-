@@ -34,6 +34,8 @@ Route::get('/condition',[AuthController::class,'condition'])->name('condition');
     Route::get('/listPage',[CategoryController::class,'listPage'])->name('admin#listPage');
     Route::get('/page',[CategoryController::class,'categoryPage'])->name('admin#categoryPage');
     Route::post('/page/create',[CategoryController::class,'categoryCreate'])->name('admin#categoryCreate');
+    Route::delete('/delete/{id}',[CategoryController::class,'categoryDelete'])->name('admin#categoryDelete');
+
  });
 
 

@@ -27,10 +27,9 @@
                                 @enderror
                             </div>
 
-                            <div>
-                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                    <span id="payment-button-amount">Create</span>
-                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                            <div class="" >
+                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block w-100 mt-2 mb-2">
+                                    <span id="payment-button-amount ">Create 
                                     <i class="fa-solid fa-circle-right"></i>
                                 </button>
                             </div>

@@ -13,4 +13,11 @@ class Category extends Model
         'category_id',
         'name'
     ];
+
+    public function scopesearch($query ,$data)
+    {
+        $query->when($data,function($query ,$search){
+            $query->where('name','like','%'.$search.'%');
+        });
+    }
 }
