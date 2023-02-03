@@ -23,11 +23,20 @@ class Validation extends FormRequest
      */
     public function rules()
     {
-
+        return [
+            'oldPassword' =>'required|min:6',
+            'newPassword' =>'required|min:6',
+            'confirmPassword'=>'required|min:6|same:newPassword'
+        ];
     }
 
     public function messages()
     {
-        
+        return [
+            'oldPassword.required' => "You need to fill the old password!",
+            'newPassword.required' => "You need to fill the new password!",
+            'confirmPassword.required' => "You need to fill the old password!",
+            'confirmPassword.same' =>"Your password need to same with new password!"
+        ];
     }
 }

@@ -39,8 +39,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
+    protected $hidden = [//this function is when you  hidden data , declare  in this function
+        
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',

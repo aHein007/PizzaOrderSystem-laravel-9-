@@ -51,8 +51,8 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         {{-- <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Home Page
+                          <a href="{{route('admin#listPage')}}">
+                                <i class="fas fa-chart-bar"></i>Category
                             </a>
                         </li> --}}
                         <li>
@@ -148,11 +148,18 @@
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__footer ml-4">
-                                                <form action="{{route('logout')}}" method="post">
+
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{route('admin#passwordPage')}}">
+                                                        <i class="fa-solid fa-key"></i>Password</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="account-dropdown__footer ">
+                                                <form action="{{route('logout')}}" class="" method="post">
                                                     @csrf
-                                                    <i class="zmdi zmdi-power" ></i>
-                                                    <button type="submit" class="m-2 btn-sm" >Logout</button>
+                                                    <button type="submit" class="w-100 btn btn-dark" ><i class="zmdi zmdi-power" ></i> Logout</button>
                                                 </form>
                                             </div>
                                         </div>
