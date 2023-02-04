@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //auth , login , logout
-Route::controller(AuthController::class)->group(function(){
+Route::middleware('admin_auth')->controller(AuthController::class)->group(function(){
     Route::redirect('/','/loginPage');
     Route::get('/loginPage','loginPage')->name('auth#loginPage');
     Route::get('/registerPage','registerPage')->name('auth#registerPage');
@@ -30,10 +31,17 @@ Route::middleware('auth')->group(function () {
 Route::get('/condition',[AuthController::class,'condition'])->name('condition');
 
     //admin //profile
-    Route::group(['prefix' => 'admin'],function(){
-        Route::get('passwordPage',[AuthController::class,'passwordPage'])->name('admin#passwordPage');
-        Route::post('passwordPage/change',[AuthController::class,'changePassword'])->name('admin#changePassword');
-    })->middleware('admin_auth');
+    Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
+        //account
+        Route::get('accountPage',[AdminController::class,'accountPage'])->name('admin#accountPage');
+        Route::get('accountPage/editPage',[AdminController::class,'editPage'])->name('admin#editPage');
+        Route::post('accountPage/editPage/edit',[AdminController::class,'edit'])->name('admin#edit');
+
+
+        //password
+        Route::get('passwordPage',[AdminController::class,'passwordPage'])->name('admin#passwordPage');
+        Route::post('passwordPage/change',[AdminController::class,'changePassword'])->name('admin#changePassword');
+    });
 
    //admin
  Route::group(['prefix' =>'category','middleware'=>'admin_auth'],function(){

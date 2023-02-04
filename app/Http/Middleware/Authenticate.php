@@ -18,4 +18,4 @@ class Authenticate extends Middleware
             return route('auth#loginPage');//when user is logout but route will right , go back loginPage
         }
     }
-} 
+}

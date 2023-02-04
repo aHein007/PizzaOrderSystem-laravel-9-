@@ -19,7 +19,7 @@ class UserAuthMiddleware
     {
         if(Auth::user()->role != 'user')
         {
-            abort(404);
+           return back();
         }
 
         return $next($request);//this is middleware and it will return back when not user

@@ -17,11 +17,21 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-       if(Auth::user()->role != 'admin')
-       {
-            abort(404);
-       }
+        if(!empty(Auth::user()))
+        {   //if user is have , can't go login page and register page
+            if(url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage'))
+            {
+                return back();
+            }
 
-       return $next($request);//this is middleware and it will return back when not user
+            if(Auth::user()->role != 'admin')
+            {
+                 return back();
+            }
+
+            return $next($request);//this is middleware and it will return back when not user
+        }
+
+        return $next($request);
     }
 }

@@ -25,32 +25,32 @@
                         <form action="{{route('admin#changePassword')}}" method="post" novalidate="novalidate">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="cc-payment" class="control-label mb-1">Old Password</label>
-                                <input id="cc-pament" name="oldPassword" type="password"  class="form-control  @error('oldPassword') is-invalid @enderror @if(session('password')) is-invalid @endif" aria-required="true" aria-invalid="false" placeholder="Enter old Password....">
+                                <label for="cc-payment" class="control-label mb-3">Old Password</label>
+                                <input id="cc-pament" name="oldPassword" type="password"  class="form-control rounded  @error('oldPassword') is-invalid @enderror @if(session('password')) is-invalid @endif" aria-required="true" aria-invalid="false" placeholder="Enter old Password....">
                                 @error('oldPassword')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                                 @if (session('password'))
-                                    <small class="text-danger">{{session('password')}}</small>
+                                    <small class="text-danger ">{{session('password')}}</small>
                                 @endif
 
 
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="cc-payment" class="control-label mb-1">New Password</label>
-                                <input id="cc-pament" name="newPassword" type="password"  class="form-control  @error('newPassword') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter New Password....">
+                                <label for="cc-payment" class="control-label mb-3">New Password</label>
+                                <input id="cc-pament" name="newPassword" type="password"  class="form-control rounded  @error('newPassword') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter New Password....">
                                @error('newPassword')
-                                    <small class="text-danger ">{{$message}}</small>
+                                    <small class="text-danger  mt-3">{{$message}}</small>
                                @enderror
                             </div>
 
 
                             <div class="form-group mb-3">
-                                <label for="cc-payment" class="control-label mb-1">Confirm Password</label>
-                                <input id="cc-pament" name="confirmPassword" type="password"  class="form-control @error('confirmPassword') is-invalid @enderror " aria-required="true" aria-invalid="false" placeholder="Enter Confirm Password....">
+                                <label for="cc-payment" class="control-label mb-3">Confirm Password</label>
+                                <input id="cc-pament" name="confirmPassword" type="password"  class="form-control rounded @error('confirmPassword') is-invalid @enderror " aria-required="true" aria-invalid="false" placeholder="Enter Confirm Password....">
                                @error('confirmPassword')
-                                    <small class="text-danger">{{$message}}</small>
+                                    <small class="text-danger mt-3">{{$message}}</small>
                                @enderror
                             </div>
 
