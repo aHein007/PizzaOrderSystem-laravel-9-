@@ -28,6 +28,17 @@
         </div>
 
         <div class="form-group">
+            <label>Gender</label>
+            <select name="gender" class="au-input au-input--full form-control">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            @error('gender')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label>Phone</label>
             <input class="au-input au-input--full" type="number" name="phone" placeholder="09 xxxxx">
             @error('phone')

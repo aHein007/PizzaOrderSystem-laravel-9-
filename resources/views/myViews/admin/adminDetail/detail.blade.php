@@ -28,7 +28,7 @@
                                     @if (Auth::user()->image == null)
                                       <img src="{{asset('image/default_image.jpg')}}" class=" rounded " alt="">
                                     @else
-                                        <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
                                     @endif
                                  </a>
                                  <div class="text-center">Role - {{Auth::user()->role}}</div>
@@ -40,6 +40,9 @@
                                         </div>
                                         <div class="m-3 ">
                                             <label for=""><i class="fa-solid fa-envelope me-2"></i> Eamil</label> : {{Auth::user()->email}}
+                                        </div>
+                                        <div class="m-3 ">
+                                            <label for=""><i class="fa-solid fa-envelope me-2"></i> Gender</label> : {{Auth::user()->gender}}
                                         </div>
                                         <div class="m-3 ">
                                             <label for=""><i class="fa-solid fa-phone me-2"></i> Phone</label> : {{Auth::user()->phone}}

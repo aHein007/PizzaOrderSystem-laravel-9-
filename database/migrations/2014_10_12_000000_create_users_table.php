@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('image')->nullable();
             $table->string('phone',15);
+            $table->string('gender');
             $table->string('role',10)->default('user');
             $table->longText('address');
             $table->timestamp('email_verified_at')->nullable();

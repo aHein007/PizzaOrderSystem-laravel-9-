@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
         'password_confirmation',
         'phone',
         'image',
@@ -40,7 +41,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [//this function is when you  hidden data , declare  in this function
-        
+
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',

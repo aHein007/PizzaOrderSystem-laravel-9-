@@ -31,11 +31,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/condition',[AuthController::class,'condition'])->name('condition');
 
     //admin //profile
-    Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
+Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
         //account
         Route::get('accountPage',[AdminController::class,'accountPage'])->name('admin#accountPage');
         Route::get('accountPage/editPage',[AdminController::class,'editPage'])->name('admin#editPage');
-        Route::post('accountPage/editPage/edit',[AdminController::class,'edit'])->name('admin#edit');
+        Route::post('accountPage/editPage/edit/{id}',[AdminController::class,'edit'])->name('admin#edit');
 
 
         //password

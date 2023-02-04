@@ -21,7 +21,7 @@
 
                         <hr>
 
-                    <form action="{{route('admin#edit')}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin#edit',Auth::user()->id)}}" enctype="multipart/form-data" method="post">
                         @csrf
                        <div class="row">
 
@@ -30,18 +30,18 @@
                                     @if (Auth::user()->image == null)
                                       <img src="{{asset('image/default_image.jpg')}}" class=" rounded" alt="">
                                     @else
-                                        <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
                                     @endif
                                  </a>
 
                                  <div class="text-center">Role - {{Auth::user()->role}}</div>
 
                                  <div class="m-3 mt-4">
-                                    <input type="file"  name="image"class="form-control rounded" >
+                                    <input type="file"  name="image" class="form-control rounded" >
                                 </div>
 
                                  <div class="edit-button text-center mt-5">
-                                    <button class="btn btn-dark px-2"> <i class="fa-solid fa-file-pen me-2"></i> Update Profile</button>
+                                    <button class="btn btn-dark px-2" type="submit"> <i class="fa-solid fa-file-pen me-2"></i> Update Profile</button>
                                 </div>
                             </div>
 
@@ -55,6 +55,15 @@
                                         <div class="m-3 ">
                                             <label for=""><i class="fa-solid fa-envelope me-2 mb-3"></i> Eamil</label>
                                             <input type="text"  name="email"class="form-control rounded" value="{{old('email',Auth::user()->email)}}">
+                                        </div>
+
+
+                                        <div class="m-3 ">
+                                            <label for=""><i class="fa-solid fa-venus-mars  me-2 mb-3"></i>Gender</label>
+                                            <select name="gender" class="form-select " >
+                                                <option value="male" @if(Auth::user()->gender == 'male') selected @endif>Male</option>
+                                                <option value="female" @if(Auth::user()->gender == 'female') selected  @endif>Female</option>
+                                            </select>
                                         </div>
 
 
