@@ -33,15 +33,18 @@ class AdminController extends Controller
 
     public function edit(Request $request,$id)
     {
-
+        //validation
         $this->updateValidation($request);
 
-        $profile =$this->updateProfile($request);
+         //old image delete
+         $this->oldImage($id,$request); //delete every time /any where
 
+         $profile =$this->updateProfile($request);
 
-      if($request->hasFile('image')){//this is so important ,
-          //get image from request
-          $file =$request->file('image');//this is so important ,
+     if($request->hasFile('image')){//this is so important ,
+
+            //get image from request
+            $file =$request->file('image');//this is so important ,
 
           //make uniqid photo name
           $imageName =uniqid() .'_aung_'. $file->getClientOriginalName();
@@ -49,19 +52,10 @@ class AdminController extends Controller
            //store image
            $storeImage = $file->storeAs('public',$imageName);
 
-
-          //old image delete
-          $this->oldImage($id,$request);
-
-          $profile['image']=$imageName;
+            $profile['image']=$imageName;
       }
 
-
-
-
-
-
-       User::where('id',$id)->update($profile);
+         User::where('id',$id)->update($profile);
 
        return redirect()->route('admin#accountPage')->with('updateSuccess','Profile updated successfully!');
     }

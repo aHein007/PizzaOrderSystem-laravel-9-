@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
 
    //admin
  Route::group(['prefix' =>'category','middleware'=>'admin_auth'],function(){
+
     //category
     Route::get('/listPage',[CategoryController::class,'listPage'])->name('admin#listPage');
     Route::get('/page',[CategoryController::class,'categoryPage'])->name('admin#categoryPage');
@@ -53,6 +55,11 @@ Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
     Route::get('/updatePage/{id}',[CategoryController::class,'categoryUpdatePage'])->name('admin#categoryUpdatePage');
     Route::post('/updatePage/update/{id}',[CategoryController::class,'categoryUpdate'])->name('admin#categoryUpdate');
 
+});
+
+Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
+    Route::get('/page',[ProductController::class,'productPage'])->name("admin#productPage");
+    
 });
 
 
