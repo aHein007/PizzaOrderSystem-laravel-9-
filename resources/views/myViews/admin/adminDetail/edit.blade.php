@@ -37,7 +37,10 @@
                                  <div class="text-center">Role - {{Auth::user()->role}}</div>
 
                                  <div class="m-3 mt-4">
-                                    <input type="file"  name="image" class="form-control rounded" >
+                                    <input type="file"  name="image" class="form-control rounded mb-2" >
+                                    @error('image')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
 
                                  <div class="edit-button text-center mt-5">
@@ -49,32 +52,48 @@
 
                                     <div class="info-container">
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-user-pen me-2 mb-3"></i> Name</label>
-                                            <input type="text"  name="name" class="form-control rounded" value="{{old('name',Auth::user()->name)}}">
+                                            <label for=""><i class="fa-solid fa-user-pen me-2 mb-2"></i> Name</label>
+                                            <input type="text"  name="name" class="form-control rounded  mb-2 @error('name') is-invalid @enderror" value="{{old('name',Auth::user()->name)}}">
+                                            @error('name')
+                                                <small class="text-danger">{{$message}}</small>
+                                            @enderror
                                         </div>
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-envelope me-2 mb-3"></i> Eamil</label>
-                                            <input type="text"  name="email"class="form-control rounded" value="{{old('email',Auth::user()->email)}}">
+                                            <label for=""><i class="fa-solid fa-envelope me-2 mb-2"></i> Eamil</label>
+                                            <input type="text"  name="email"class="form-control rounded mb-2  @error('email') is-invalid @enderror" value="{{old('email',Auth::user()->email)}}">
+                                            @error('email')
+                                                <small class="text-danger">{{$message}}</small>
+                                            @enderror
                                         </div>
 
 
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-venus-mars  me-2 mb-3"></i>Gender</label>
+                                            <label for=""><i class="fa-solid fa-venus-mars  me-2 mb-2"></i>Gender</label>
                                             <select name="gender" class="form-select " >
+                                                <option value="">Choose Gender...</option>
                                                 <option value="male" @if(Auth::user()->gender == 'male') selected @endif>Male</option>
                                                 <option value="female" @if(Auth::user()->gender == 'female') selected  @endif>Female</option>
+                                                @error('gender')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                @enderror
                                             </select>
                                         </div>
 
 
 
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-phone me-2 mb-3"></i> Phone</label>
-                                            <input type="text" name="phone" class="form-control rounded" value="{{old('phone',Auth::user()->phone)}}">
+                                            <label for=""><i class="fa-solid fa-phone me-2 mb-2"></i> Phone</label>
+                                            <input type="text" name="phone" class="form-control rounded mb-2  @error('phone') is-invalid @enderror" value="{{old('phone',Auth::user()->phone)}}">
+                                            @error('phone')
+                                                <small class="text-danger">{{$message}}</small>
+                                            @enderror
                                         </div>
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-map-location-dot me-2 mb-3"></i>Address</label>
-                                            <textarea name="address"  cols="30" rows="5" class="form-control rounded">{{old('address',Auth::user()->address)}}</textarea>
+                                            <label for=""><i class="fa-solid fa-map-location-dot me-2 mb-2"></i>Address</label>
+                                            <textarea name="address"  cols="30" rows="5" class="form-control rounded mb-2  @error('address') is-invalid @enderror">{{old('address',Auth::user()->address)}}</textarea>
+                                            @error('address')
+                                                <small class="text-danger">{{$message}}</small>
+                                            @enderror
                                         </div>
 
 

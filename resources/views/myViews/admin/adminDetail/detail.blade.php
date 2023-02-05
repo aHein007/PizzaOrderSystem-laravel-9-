@@ -20,7 +20,14 @@
 
 
                         <hr>
-
+                        <div class="">
+                            @if (session('updateSuccess'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{session('updateSuccess')}}</strong> You should check in on some of Admin info below.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                            @endif
+                        </div>
 
                        <div class="row">
                             <div class="col-4 offset-1">

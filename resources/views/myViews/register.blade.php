@@ -30,6 +30,7 @@
         <div class="form-group">
             <label>Gender</label>
             <select name="gender" class="au-input au-input--full form-control">
+                <option value="">Choose Gender....</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>

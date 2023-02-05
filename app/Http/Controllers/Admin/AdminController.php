@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -33,29 +34,48 @@ class AdminController extends Controller
     public function edit(Request $request,$id)
     {
 
-        $file =$request->file('image');
+        $this->updateValidation($request);
 
-        $imageName =uniqid() .'_aung_'. $file->getClientOriginalName();
+        $profile =$this->updateProfile($request);
 
 
-        //old image delete
-        $this->oldImage($id);
+      if($request->hasFile('image')){//this is so important ,
+          //get image from request
+          $file =$request->file('image');//this is so important ,
 
-        //store image 
-        $storeImage = $file->storeAs('public',$imageName);
+          //make uniqid photo name
+          $imageName =uniqid() .'_aung_'. $file->getClientOriginalName();
 
-        $profile =$this->updateProfile($request,$imageName);
+           //store image
+           $storeImage = $file->storeAs('public',$imageName);
+
+
+          //old image delete
+          $this->oldImage($id,$request);
+
+          $profile['image']=$imageName;
+      }
+
+
+
+
+
 
        User::where('id',$id)->update($profile);
+
+       return redirect()->route('admin#accountPage')->with('updateSuccess','Profile updated successfully!');
     }
 
 
-    private function updateProfile($request,$imageName)
+    private function updateProfile($request)
     {
+
+
+
         return [
             'name'=>$request->name,
             'email' =>$request->email,
-            'image' =>$imageName,
+            'image' =>$request->image,
             'phone' =>$request->phone,
             'gender' =>$request->gender,
             'address' =>$request->address
@@ -63,15 +83,31 @@ class AdminController extends Controller
     }
 
 
-    private function oldImage($id)
+    private function oldImage($id,$request)
     {
-        $oldImage =User::select('image')
-                        ->where('id',$id)
-                        ->first();
 
-        if(isset($oldImage['image']) || $oldImage['image'] == null){ //this is so important code
+        $oldImage =User::select('image')
+        ->where('id',$id)
+        ->first();
+
+        if(isset($oldImage['image'])){ //this is so important code
             Storage::delete('public/' . $oldImage['image'] );
         }
+
+    }
+
+    private function updateValidation($request)
+    {
+        Validator::make($request->all(),[
+            'name' =>'required',
+            'email' =>'required|email',
+            'gender' =>'required',
+            'phone' =>'required|max:15',
+            'address' =>'required',
+            'image' =>'mimes:jpg,jpeg,png'
+        ],[
+
+        ])->validate();
     }
 
 
