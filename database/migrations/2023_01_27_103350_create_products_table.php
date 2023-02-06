@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id');
             $table->integer('category_id');
             $table->string('name');
+            $table->integer('waiting_time');
             $table->longText('description');
             $table->string('image')->nullable();
             $table->integer('price');

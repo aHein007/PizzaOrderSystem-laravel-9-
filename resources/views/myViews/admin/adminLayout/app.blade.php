@@ -69,7 +69,7 @@
                         </li>
 
                         <li>
-                            <a href="{{route('admin#listPage')}}">
+                            <a href="{{route('admin#productPage')}}">
                                 <i class="fas fa-chart-bar"></i>Pizza</a>
                         </li>
                     </ul>

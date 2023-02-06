@@ -2,6 +2,7 @@
 
 
 @section('content')
+<title>@section('title','Create')</title>
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -29,7 +30,7 @@
 
                             <div class="" >
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block w-100 mt-2 mb-2">
-                                    <span id="payment-button-amount ">Create 
+                                    <span id="payment-button-amount ">Create
                                     <i class="fa-solid fa-circle-right"></i>
                                 </button>
                             </div>

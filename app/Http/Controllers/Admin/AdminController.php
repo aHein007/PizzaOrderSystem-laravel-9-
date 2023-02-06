@@ -105,7 +105,7 @@ class AdminController extends Controller
     }
 
 
-    public function changePassword(Validation $request)
+    public function changePassword(Validation $request)//hash password
     {
        $currentUserId =Auth::user()->id;
         $user = User::select('password')
