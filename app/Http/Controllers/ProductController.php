@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductValidation;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductValidation;
 
 class ProductController extends Controller
 {
 
-    public function productPage()
+    public function productPage(Request $request)
     {
-       $dataProduct = Product::orderBy('id','desc')->paginate(3);
+
+
+       $dataProduct = Product::productSearch($request->searchProduct)
+                            ->orderBy('created_at','desc')
+                            ->paginate(3);
+
+
+        $dataProduct->appends($request->all());
+
         return view('myViews.admin.product.product',compact('dataProduct'));
     }
 
@@ -43,6 +52,33 @@ class ProductController extends Controller
 
         return redirect()->route('admin#productPage')->with('productCreate','Your product create successfully!');
 
+    }
+
+    public function updatePage()
+    {
+       return view("myViews.admin.product.productEdit");
+    }
+
+
+    public function productDelete($id)
+    {
+        $productImage =Product::select('image')->where('id',$id)->first();
+
+        if($productImage['image'])
+        {
+            Storage::delete('public/productImage/' . $productImage['image']);
+        };
+
+        Product::where('id',$id)->delete();
+
+        return redirect()->route("admin#productPage")->with('productDelete','Your product have been delete!');
+    }
+
+    public function detailPage($id)
+    {
+        $productItems =Product::where('id',$id)->first();
+        
+        return view('myViews.admin.product.productDetail',compact('productItems'));
     }
 
 

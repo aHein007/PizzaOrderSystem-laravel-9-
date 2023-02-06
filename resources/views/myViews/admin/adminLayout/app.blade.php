@@ -70,7 +70,7 @@
 
                         <li>
                             <a href="{{route('admin#productPage')}}">
-                                <i class="fas fa-chart-bar"></i>Pizza</a>
+                                <i class="fa-brands fa-product-hunt"></i>Product</a>
                         </li>
                     </ul>
                 </nav>

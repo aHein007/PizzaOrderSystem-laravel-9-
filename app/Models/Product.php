@@ -18,4 +18,12 @@ class Product extends Model
         'waiting_time',
         'view_count'
     ];
+
+    public function scopeproductSearch($query ,$data)
+    {
+        $query->when($data , function($query ,$search){
+            $query->where('name','like','%'.$search.'%')
+                  ->orwhere('price','like','%'.$search.'%');
+        });
+    }
 }
