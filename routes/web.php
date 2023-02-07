@@ -62,6 +62,7 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
     Route::get('/createPage',[ProductController::class,'productCreatePage'])->name('admin#productCreatePage');
     Route::post('/createPage/create',[ProductController::class,'productCreate'])->name('admin#productCreate');
     Route::get('/updatePage/{id}',[ProductController::class,'updatePage'])->name('admin#updatePage');
+    Route::post('/updatePage/update/{id}',[ProductController::class,'update'])->name('admin#update');
     Route::delete('/delete/{id}',[ProductController::class,'productDelete'])->name('admin#productDelete');
     Route::get('/detailPage/{id}',[ProductController::class,'detailPage'])->name('admin#detailPage');
 });

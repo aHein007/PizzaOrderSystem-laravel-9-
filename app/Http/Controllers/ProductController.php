@@ -54,9 +54,40 @@ class ProductController extends Controller
 
     }
 
-    public function updatePage()
+    public function updatePage($id)
     {
-       return view("myViews.admin.product.productEdit");
+        $product =Product::where('id',$id)->first();
+
+        $categoryData=Category::select('id','name')->get();
+
+
+       return view("myViews.admin.product.productEdit",compact('product','categoryData'));
+    }
+
+    public function update(ProductValidation $request,$id)
+    {
+      $updateData=  $this->createData($request);
+
+     $deletePhoto =   $this->updatePhotoDelete($id);
+
+
+
+      if($request->hasFile('image'))
+      {
+        $file =$request->file('image');
+
+        $newImagePhoto =uniqid() ."_". $file->getClientOriginalName();
+
+        $file->storeAs('public/productImage/', $newImagePhoto);
+
+        $updateData['image'] =$newImagePhoto;
+
+
+      }
+
+        Product::where('id',$id)->update($updateData);
+
+        return redirect()->route('admin#productPage')->with('productUpdate','Your product have been update!');
     }
 
 
@@ -77,8 +108,21 @@ class ProductController extends Controller
     public function detailPage($id)
     {
         $productItems =Product::where('id',$id)->first();
-        
+
         return view('myViews.admin.product.productDetail',compact('productItems'));
+    }
+
+
+    private function updatePhotoDelete($id)
+    {
+        $oldImagePhoto =Product::select('image')
+                                ->where('id',$id)
+                                ->first();
+
+        if($oldImagePhoto['image'] != null )
+        {
+            Storage::delete('public/productImage/'. $oldImagePhoto['image']);
+        }
     }
 
 

@@ -5,15 +5,16 @@
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            {{-- <div class="row">
-                <div class="col-3 offset-8">
-                    <a href="{{route('admin#listPage')}}"><button class="btn bg-dark text-white my-3">List</button></a>
-                </div>
-            </div> --}}
 
-            <div class="col-lg-8 offset-2">
+
+            <div class="col-lg-10 offset-1">
                 <div class="card">
                     <div class="card-body">
+                        <div class=" ms-3">
+                            <i class="fa-solid fa-arrow-left-long cursor-pointer" onclick="history.back()"></i>
+                        </div>
+
+
                         <div class="card-title">
                             <h3 class="text-center title-2">Product Info</h3>
                         </div>
@@ -40,7 +41,7 @@
                                     <label for=""><i class="fa-brands fa-product-hunt text-danger"></i> Name</label> - {{$productItems['name']}}
                                 </div>
                             </div>
-                            <div class="col-6 offset-1">
+                            <div class="col-6 ">
                                     <div class="info-container">
 
                                         <div class="m-3 ">

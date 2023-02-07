@@ -48,9 +48,9 @@
                 </div>
 
                 <div class="">
-                    @if (session('update'))
+                    @if (session('productUpdate'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{session('update')}}</strong> You should check in on some of Product list below.
+                        <strong>{{session('productUpdate')}}</strong> You should check in on some of Product list below.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
                     @endif
