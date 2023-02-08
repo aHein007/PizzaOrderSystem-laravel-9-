@@ -62,7 +62,7 @@
                                             <select name="category" id=""  class="form-select  rounded mb-2 @error('category') is-invalid @enderror">
                                                 <option value="">Choose Category...</option>
                                                     @foreach ($categoryData as $items)
-                                                        <option value="{{$items->id}}">{{$items->name}}</option>
+                                                        <option value="{{$items->id}}" @if($items->id == $product['category_id'] ) selected @endif>{{$items->name}}</option>
                                                     @endforeach
                                             </select>
 
@@ -96,4 +96,5 @@
             </div>
         </div>
     </div>
+
 @endsection

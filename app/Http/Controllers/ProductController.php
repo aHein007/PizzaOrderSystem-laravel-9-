@@ -15,9 +15,15 @@ class ProductController extends Controller
     {
 
 
+
+
        $dataProduct = Product::productSearch($request->searchProduct)
-                            ->orderBy('created_at','desc')
+                            ->select('products.*','products.name','products.category_id','categories.name as category_name')// သူ ကို ပါ("products")
+                            ->leftJoin('categories','categories.id','products.category_id')
+                            ->orderBy('products.created_at','desc')
                             ->paginate(3);
+
+        //data  တေ ကို join ထားတဲ့ table data ရဲ့ data အဖြစ် ပြန် ပြောင်း ပေး ရပါ တယ
 
 
         $dataProduct->appends($request->all());
@@ -59,7 +65,7 @@ class ProductController extends Controller
         $product =Product::where('id',$id)->first();
 
         $categoryData=Category::select('id','name')->get();
-
+        
 
        return view("myViews.admin.product.productEdit",compact('product','categoryData'));
     }
@@ -107,7 +113,11 @@ class ProductController extends Controller
 
     public function detailPage($id)
     {
-        $productItems =Product::where('id',$id)->first();
+        $productItems =Product::select('products.*','products.name','products.category_id','categories.name as category_name')->where('products.id',$id)
+                    ->leftJoin('categories','categories.id','products.category_id')
+                    ->first();
+
+
 
         return view('myViews.admin.product.productDetail',compact('productItems'));
     }

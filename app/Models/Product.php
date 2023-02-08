@@ -22,8 +22,8 @@ class Product extends Model
     public function scopeproductSearch($query ,$data)
     {
         $query->when($data , function($query ,$search){
-            $query->where('name','like','%'.$search.'%')
-                  ->orwhere('price','like','%'.$search.'%');
+            $query->where('products.name','like','%'.$search.'%')
+                  ->orwhere('products.price','like','%'.$search.'%');
         });
     }
 }

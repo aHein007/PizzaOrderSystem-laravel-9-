@@ -10,13 +10,14 @@
             <div class="col-lg-10 offset-1">
                 <div class="card">
                     <div class="card-body">
-                        <div class=" ms-3">
-                            <i class="fa-solid fa-arrow-left-long cursor-pointer" onclick="history.back()"></i>
-                        </div>
 
+                        <div class=" ms-3 pt-3">
+                            <i class="cursor-pointer fa-solid fa-arrow-left-long " onclick="history.back()"></i>
+                        </div>
 
                         <div class="card-title">
                             <h3 class="text-center title-2">Product Info</h3>
+
                         </div>
 
 
@@ -51,10 +52,14 @@
                                             <label for=""><i class="fa-solid fa-clock text-dark me-2"></i> Waiting Time</label> - {{$productItems['waiting_time']}} minutes
                                         </div>
                                         <div class="m-3 ">
-                                            <label for=""><i class="fa-regular fa-rectangle-list text-primary me-2"></i> Category </label> - {{$productItems['category_id']}}
+                                            <label for=""><i class="fa-regular fa-rectangle-list text-primary me-2"></i> Category </label> - {{$productItems['category_name']}}
                                         </div>
                                         <div class="m-3 ">
                                             <label for=""><i class="fa-solid fa-eye text-info me-2"></i>View Count</label> - {{$productItems['view_count']}} views
+                                        </div>
+
+                                        <div class="m-3 ">
+                                            <label for=""><i class="fa-solid fa-calendar-day me-2 text-info"></i> Created at</label> - {{$productItems['created_at']->format('j / m / Y')}}
                                         </div>
 
                                         <div class="m-3 ">
@@ -64,18 +69,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="m-3 ">
-                                            <label for=""><i class="fa-solid fa-calendar-day me-2 text-info"></i> Created at</label> - {{Auth::user()->created_at->format('j / m / Y')}}
-                                        </div>
+
                                     </div>
 
                             </div>
 
-                            <a href="{{route('admin#updatePage',$productItems['id'])}}">
-                                <div class="edit-button mt-4 text-center">
-                                    <button class="btn btn-dark px-3"> <i class="fa-solid fa-file-pen me-2"></i> Update Product</button>
-                                </div>
-                            </a>
+
                        </div>
                     </div>
                 </div>

@@ -79,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @if (count($dataProduct) != 0)
+                           @if (count($dataProduct) > 0)
                                 @foreach ($dataProduct as $data)
                                 <tr class="tr-shadow">
                                     <td >
@@ -87,7 +87,7 @@
                                     </td>
                                     <td>{{$data->name}}</td>
                                     <td>{{$data->price}} $ <i class="fa-solid ms-1 fa-money-bill-1-wave text-success"></i></td>
-                                    <td>{{$data->category_id}} </td>
+                                    <td>{{$data->category_name}} </td>
                                     <td>{{$data->view_count}} <i class="fa-solid fa-eye text-info"></i></td>
                                     <td>
                                         <div class="table-data-feature ">
