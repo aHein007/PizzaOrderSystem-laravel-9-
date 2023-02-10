@@ -12,7 +12,7 @@
                 <form>
                     <div class="custom-control  d-flex align-items-center justify-content-between mb-3">
                         <label class="" for="price-1">All Category</label>
-                        <span class="badge font-weight-normal">{{count($category)}}</span>
+                        <span class="badge font-weight-normal text-dark">{{count($category)}}</span>
                     </div>
 
                     @foreach ($category as $items )
@@ -89,14 +89,14 @@
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="">{{$items->name}}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>20000 kyats</h5><h6 class="text-muted ml-2"><del>{{$items->price}}</del></h6>
+                                <h5>{{$items->price}} kyats</h5><h6 class="text-muted ml-2"><del>80000</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-warning mr-1"></small>
+                                <small class="fa fa-star text-warning mr-1"></small>
+                                <small class="fa fa-star text-warning mr-1"></small>
+                                <small class="fa fa-star text-warning mr-1"></small>
+                                <small class="fa fa-star text-warning mr-1"></small>
                             </div>
                         </div>
                     </div>

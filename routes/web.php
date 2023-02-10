@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserPasswordController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,11 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
  //user
  Route::group(['prefix' => 'user','middleware' =>'user_auth'],function(){
    Route::get('home',[UserController::class,'homePage'])->name('user#home');
+
+   Route::prefix('profile')->group(function(){
+     Route::get('profilePage/{id}',[UserProfileController::class,'profilePage'])->name('user#profilePage');
+     Route::post('updateProfile/{id}',[UserProfileController::class,'update'])->name('user#updateProfile');
+   });
 
    Route::prefix('password')->group(function(){
         Route::get('passwordPage',[UserPasswordController::class,'passwordPage'])->name('user#passwordPage');

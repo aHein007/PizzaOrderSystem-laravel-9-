@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserPasswordController extends Controller
 {
+
+    
+
+
+
+
     public function passwordPage()
     {
         return view('myViews.user.password.passwordPage');
