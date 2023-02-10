@@ -6,13 +6,14 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                    {{-- <div class="col-3 offset-8">
-                        <a href="{{route('admin#productPage')}}"><button class="btn bg-dark text-white my-3">List</button></a>
-                    </div> --}}
+
                 </div>
                 <div class="col-lg-8 offset-2">
                     <div class="card">
                         <div class="card-body">
+                            <div class=" ms-3 pt-3">
+                                <i class="cursor-pointer fa-solid fa-arrow-left-long " onclick="history.back()"></i>
+                            </div>
                             <div class="card-title">
                                 <h3 class="text-center title-2">Product Edit Form</h3>
                             </div>

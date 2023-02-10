@@ -131,10 +131,18 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                           @if (Auth::user()->image == null)
-                                             <img src="{{asset('image/default_image.jpg')}}" class="rounded" alt="">
-                                           @else
-                                                <img src="{{asset('storage/' . Auth::user()->image)}}" alt="John Doe" />
+                                           @if (Auth::user()->image != null)
+                                           <td>
+                                                <img src="{{asset('storage/' . Auth::user()->image)}}" alt="" width="100px" class="mt-2">
+                                             </td>
+                                           @elseif(Auth::user()->gender == 'female')
+                                           <td>
+                                                <img src="{{asset('image/default_female.jpg'  )}}" alt="" width="100px">
+                                            </td>
+                                            @else
+                                            <td>
+                                                <img src="{{asset('image/default_image.jpg'  )}}" alt="" width="100px">
+                                            </td>
                                            @endif
 
                                         </div>
@@ -145,10 +153,18 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                       @if (Auth::user()->image == null)
-                                                         <img src="{{asset('image/default_image.jpg')}}" class=" rounded" alt="">
-                                                       @else
-                                                            <img src="{{asset('storage/' . Auth::user()->image)}}" alt="John Doe" />
+                                                       @if (Auth::user()->image != null)
+                                                       <td>
+                                                            <img src="{{asset('storage/' . Auth::user()->image)}}" alt="" width="100px">
+                                                         </td>
+                                                       @elseif(Auth::user()->gender == 'female')
+                                                       <td>
+                                                            <img src="{{asset('image/default_female.jpg'  )}}" alt="" width="100px">
+                                                        </td>
+                                                        @else
+                                                        <td>
+                                                            <img src="{{asset('image/default_image.jpg'  )}}" alt="" width="100px">
+                                                        </td>
                                                        @endif
 
                                                     </a>
@@ -169,10 +185,19 @@
 
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
+                                                    <a href="{{route('admin#adminListPage')}}">
+                                                        <i class="zmdi zmdi-accounts"></i>Admin List</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
                                                     <a href="{{route('admin#passwordPage')}}">
                                                         <i class="fa-solid fa-key"></i>Password</a>
                                                 </div>
                                             </div>
+
+
 
                                             <div class="account-dropdown__footer ">
                                                 <form action="{{route('logout')}}" class="" method="post">

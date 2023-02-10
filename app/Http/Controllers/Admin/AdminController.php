@@ -30,6 +30,23 @@ class AdminController extends Controller
         return view('myViews.admin.adminDetail.edit');
     }
 
+    public function adminListPage(Request $request)
+    {
+        $adminData =User::when($request->search_admin ,function($query,$search){
+
+                            $query->orwhere('name','like',"%".$search."%")
+
+                                  ->orwhere('email','like',"%".$search."%");})
+
+                                  ->where('role','admin')
+                                  ->orderBy('created_at','desc')
+                                  ->paginate(3);
+
+            $adminData->appends($request->all());
+
+        return view('myViews.admin.adminList.adminList',compact('adminData'))->with('changeUser','Admin role to User role change successfully!');
+    }
+
 
     public function edit(Request $request,$id)
     {
@@ -37,7 +54,7 @@ class AdminController extends Controller
         $this->updateValidation($request);
 
          //old image delete
-         $this->oldImage($id,$request); //delete every time /any where
+         $this->oldImage($id); //delete every time /any where
 
          $profile =$this->updateProfile($request);
 
@@ -77,7 +94,7 @@ class AdminController extends Controller
     }
 
 
-    private function oldImage($id,$request)
+    private function oldImage($id)
     {
 
         $oldImage =User::select('image')
@@ -105,6 +122,35 @@ class AdminController extends Controller
     }
 
 
+    public function adminDelete($id)
+    {
+        $this->oldImage($id);
+
+        User::where('id',$id)->delete();
+
+        return back()->with('adminDelete','Admin account have been delete!');
+    }
+
+
+    public function changeRolePage($id)
+    {
+        $account =User::where('id',$id)->first();
+        return view('myViews.admin.adminDetail.changeRole',compact('account'));
+    }
+
+    public function changeRole(Request $request,$id)
+    {
+       User::where('id',$id)->update([
+            'role' => $request->changeRole
+       ]);
+
+       return redirect()->route('admin#adminListPage');
+    }
+
+
+
+
+
     public function changePassword(Validation $request)//hash password
     {
        $currentUserId =Auth::user()->id;
@@ -130,6 +176,8 @@ class AdminController extends Controller
 
 
     }
+
+
 
 
 }

@@ -32,10 +32,18 @@
                        <div class="row">
                             <div class="col-4 offset-1">
                                 <a href="#">
-                                    @if (Auth::user()->image == null)
-                                      <img src="{{asset('image/default_image.jpg')}}" class=" rounded " alt="">
-                                    @else
-                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
+                                    @if (Auth::user()->image != null)
+                                    <td>
+                                         <img src="{{asset('storage/' . Auth::user()->image)}}" alt="" width="250px" class="mt-3">
+                                      </td>
+                                    @elseif(Auth::user()->gender == 'female')
+                                    <td>
+                                         <img src="{{asset('image/default_female.jpg'  )}}" alt=""  width="250px" class="mt-3">
+                                     </td>
+                                     @else
+                                     <td>
+                                         <img src="{{asset('image/default_image.jpg'  )}}" alt=""  width="250px" class="mt-3">
+                                     </td>
                                     @endif
                                  </a>
                                  <div class="text-center">Role - {{Auth::user()->role}}</div>
