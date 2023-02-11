@@ -53,60 +53,147 @@
                         </div>
                         <div class="ml-2">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
-                                </div>
+                               <select name="sorting" class="form-select" id="sortingOption">
+                                <option value="">Choose Option</option>
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                               </select>
                             </div>
-                            <div class="btn-group ml-2">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">20</a>
-                                    <a class="dropdown-item" href="#">30</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
-                <a href="detail.html">
+                <span class="row" id="myList">
+                    @foreach ($pizza as $items)
+                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                     <div class="product-item bg-light mb-4">
+                         <div class="product-img position-relative overflow-hidden">
+                             <img class="img-fluid w-100" style='width:230px' src="{{asset('storage/productImage/' . $items->image)}}" alt="" >
+                              <div class="product-action">
+                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                 {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a> --}}
+                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                             </div>
+                         </div>
 
-                   @foreach ($pizza as $items)
-                   <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" style='width:230px' src="{{asset('storage/productImage/' . $items->image)}}" alt="" >
-                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a> --}}
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
-                            </div>
-                        </div>
-
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">{{$items->name}}</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>{{$items->price}} kyats</h5><h6 class="text-muted ml-2"><del>80000</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-warning mr-1"></small>
-                                <small class="fa fa-star text-warning mr-1"></small>
-                                <small class="fa fa-star text-warning mr-1"></small>
-                                <small class="fa fa-star text-warning mr-1"></small>
-                                <small class="fa fa-star text-warning mr-1"></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                   @endforeach
-                </a>
-
+                         <div class="text-center py-4">
+                             <a class="h6 text-decoration-none text-truncate" href="">{{$items->name}}</a>
+                             <div class="d-flex align-items-center justify-content-center mt-2">
+                                 <h5>{{$items->price}} kyats</h5><h6 class="text-muted ml-2"><del>80000</del></h6>
+                             </div>
+                             <div class="d-flex align-items-center justify-content-center mb-1">
+                                 <small class="fa fa-star text-warning mr-1"></small>
+                                 <small class="fa fa-star text-warning mr-1"></small>
+                                 <small class="fa fa-star text-warning mr-1"></small>
+                                 <small class="fa fa-star text-warning mr-1"></small>
+                                 <small class="fa fa-star text-warning mr-1"></small>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                    @endforeach
+                </span>
             </div>
         </div>
         <!-- Shop Product End -->
     </div>
 </div>
+@endsection
+
+
+@section('scriptSoucre')
+   <script>
+       $(document).ready(function(){
+
+
+          $('#sortingOption').change(function(){
+            let sorting =$('#sortingOption').val();
+                if(sorting == 'asc'){
+                    $.ajax({
+                             type:'get',
+                             url:'http://127.0.0.1:8000/user/ajax/pizzaList',//သူ က နေ ပြီတော့ data ပါ လာ တာ ပါ//ပြီးတော့ သူ က အဲ့ route ကို ('asc','desc') ပေးလိုက် ပါ တယ်?
+                             dataType:'json',
+                             data:{'status':'asc'},
+                              success :function(response){
+                                let list="";
+                                for(let i = 0 ; i < response.length; i++){
+                                    list +=`<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                     <div class="product-item bg-light mb-4">
+                                     <div class="product-img position-relative overflow-hidden">
+                                                <img class="img-fluid w-100" style='width:230px' src="{{asset('storage/productImage/${response[i].image}')}}" alt="" >
+                                                <div class="product-action">
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center py-4">
+                                                <a class="h6 text-decoration-none text-truncate" href="">${response[i].name}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>${response[i].price} kyats</h5><h6 class="text-muted ml-2"><del>80000</del></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                                }
+
+                                $('#myList').html(list);
+                            }
+                         });
+                }else if(sorting == 'desc'){
+                    $.ajax({
+                             type:'get',
+                             url:'http://127.0.0.1:8000/user/ajax/pizzaList',//သူ က နေ ပြီတော့ data ပါ လာ တာ ပါ//ပြီးတော့ သူ က အဲ့ route ကို ('asc','desc') ပေးလိုက် ပါ တယ်?
+                             dataType:'json',
+                             data:{'status':'desc'},
+                              success :function(response){
+                                let list="";
+                                for(let i = 0 ; i < response.length; i++){
+                                    list +=`<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                     <div class="product-item bg-light mb-4">
+                                     <div class="product-img position-relative overflow-hidden">
+                                                <img class="img-fluid w-100" style='width:230px' src="{{asset('storage/productImage/${response[i].image}')}}" alt="" >
+                                                <div class="product-action">
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center py-4">
+                                                <a class="h6 text-decoration-none text-truncate" href="">${response[i].name}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>${response[i].price} kyats</h5><h6 class="text-muted ml-2"><del>80000</del></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                    <small class="fa fa-star text-warning mr-1"></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                                }
+
+                                $('#myList').html(list);
+                            }
+                         });
+                }
+          });
+
+
+
+       })
+   </script>
 @endsection

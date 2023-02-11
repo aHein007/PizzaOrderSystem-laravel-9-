@@ -50,7 +50,7 @@ class UserProfileController extends Controller
     {
         return [
             'name' =>$request->name,
-            'email' =>$request->email,
+            'email' =>$request->emailj,
             'gender' =>$request->gender,
             'phone' =>$request->phone,
             'address' =>$request->address,

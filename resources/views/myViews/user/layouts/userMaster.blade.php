@@ -64,7 +64,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mr-auto  py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Home</a>
+                            <a href="{{route('user#home')}}" class="nav-item nav-link active">Home</a>
                             <a href="cart.html" class="nav-item nav-link">My Cart</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
@@ -116,7 +116,7 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{{route('user#home')}}">Home</a>
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
                     <span class="breadcrumb-item active">Shop List</span>
                 </nav>
@@ -222,6 +222,9 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('user/js/main.js')}}"></script>
+    {{-- jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
+@yield('scriptSoucre')
 
 </html>

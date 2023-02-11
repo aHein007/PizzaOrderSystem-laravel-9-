@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserPasswordController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,13 +81,21 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
 
  //user
  Route::group(['prefix' => 'user','middleware' =>'user_auth'],function(){
+    //user page
    Route::get('home',[UserController::class,'homePage'])->name('user#home');
 
+   //ajax method route
+   Route::prefix('ajax')->group(function(){ //this is important code
+        Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#ajaxData');
+   });
+
+   //user profile
    Route::prefix('profile')->group(function(){
      Route::get('profilePage/{id}',[UserProfileController::class,'profilePage'])->name('user#profilePage');
      Route::post('updateProfile/{id}',[UserProfileController::class,'update'])->name('user#updateProfile');
    });
 
+   //user password
    Route::prefix('password')->group(function(){
         Route::get('passwordPage',[UserPasswordController::class,'passwordPage'])->name('user#passwordPage');
         Route::post('changePassword/{id}',[UserPasswordController::class,'passwordChange'])->name('user#passwordChange');
