@@ -84,15 +84,22 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
     //user page
    Route::get('home',[UserController::class,'homePage'])->name('user#home');
 
+   Route::prefix('pizza')->group(function(){
+        Route::get('detail/{id}',[UserController::class,'detailPage'])->name('user#detailPage');
+   });
+
+   //filter category
+   Route::get('category/filter/{id}',[UserController::class,'filterProcess'])->name('users#filterProcess');
+
    //ajax method route
    Route::prefix('ajax')->group(function(){ //this is important code
-        Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#ajaxData');
+      Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#pizzaList');
    });
 
    //user profile
    Route::prefix('profile')->group(function(){
      Route::get('profilePage/{id}',[UserProfileController::class,'profilePage'])->name('user#profilePage');
-     Route::post('updateProfile/{id}',[UserProfileController::class,'update'])->name('user#updateProfile');
+    Route::post('updateProfile/{id}',[UserProfileController::class,'update'])->name('user#updateProfile');
    });
 
    //user password
