@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid pb-5">
-
+    @section('title','Detail')
    <div class="row px-xl-5">
     <div class="col-lg-5 mb-30">
-        <div class=" mt-1 mb-1"><a href="{{route('user#home')}}" class=" text-dark text-decoration-none"><i class="fa fa-align-left" aria-hidden="true"></i> Back</a></div>
+        <div class=" mt-2 mb-2"><a href="{{route('user#home')}}" class=" text-dark text-decoration-none"><i class="fa-solid fa-arrow-left-long"></i> Back</a></div>
         <div id="product-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner bg-light">
                 <div class="carousel-item active">
@@ -38,15 +38,19 @@
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
-                    <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                    <input type="text" class="form-control bg-secondary border-0 text-center" value="1" id="inputCart">
                     <div class="input-group-btn">
                         <button class="btn btn-warning  btn-plus">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-warning  px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                    Cart</button>
+                <input type="hidden" value="{{Auth::user()->id}}" id="userId">
+                <input type="hidden" value="{{$productDetail->id}}" id="productId">
+                {{-- <a href="{{route('user#addCart')}}"> --}}
+                    {{-- ajax is not need id and route --}}
+                    <button type="button" class="btn btn-warning  px-3" id="addCartBtn"><i class="fa fa-shopping-cart mr-1" ></i> Add To Cart</button>
+                {{-- </a> --}}
             </div>
             <div class="d-flex pt-2">
                 <strong class="text-dark mr-2">Share on:</strong>
@@ -181,4 +185,40 @@
     </div>
 </div>
 <!-- Products End -->
+@endsection
+
+@section('scriptSourse')
+
+<script>
+    $(document).ready(function(){
+        $('#addCartBtn').click(function(){
+
+
+           $source ={
+                'count' : $('#inputCart').val(),
+                'userId' : $('#userId').val(),
+                'productId' :$('#productId').val()
+          }
+
+          console.log($source);
+
+            $.ajax({
+                type : 'get',
+                url :'http://127.0.0.1:8000/user/ajax/addCart',
+                data : $source,
+                dataType :'json',
+
+                success:function(response){
+                    if(response.status == 'success'){
+                        window.location.href ="http://127.0.0.1:8000/user/home"
+                    }
+
+                }
+
+
+            })
+        })
+    })
+</script>
+
 @endsection

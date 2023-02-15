@@ -41,4 +41,6 @@ class UserController extends Controller
 
         return view("myViews.user.productDetail",compact('productDetail','pizzaList'));
     }
+
+    
 }

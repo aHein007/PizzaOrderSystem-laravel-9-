@@ -86,6 +86,8 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
 
    Route::prefix('pizza')->group(function(){
         Route::get('detail/{id}',[UserController::class,'detailPage'])->name('user#detailPage');
+        Route::get('addCartPage',[UserController::class,'addCartPage'])->name('user#addCartPage');
+
    });
 
    //filter category
@@ -94,6 +96,7 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
    //ajax method route
    Route::prefix('ajax')->group(function(){ //this is important code
       Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#pizzaList');
+      Route::get('addCart',[AjaxController::class,'addCart'])->name('user#addCart');
    });
 
    //user profile
