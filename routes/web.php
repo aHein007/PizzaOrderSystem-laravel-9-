@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\AjaxController;
@@ -86,7 +87,7 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
 
    Route::prefix('pizza')->group(function(){
         Route::get('detail/{id}',[UserController::class,'detailPage'])->name('user#detailPage');
-        Route::get('addCartPage',[UserController::class,'addCartPage'])->name('user#addCartPage');
+        Route::get('addCartPage/{id}',[CartController::class,'addCartPage'])->name('user#addCartPage');
 
    });
 

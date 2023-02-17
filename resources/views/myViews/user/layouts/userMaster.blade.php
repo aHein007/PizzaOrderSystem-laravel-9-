@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('user/img/favicon.ico')}}" rel="icon">
+    {{-- <link href="{{asset('user/img/favicon.ico')}}" rel="icon"> --}}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="{{asset('user/https://fonts.gstatic.com')}}">
@@ -73,10 +73,7 @@
                                 <i class="fas fa-heart text-warning"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-warning"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+
 
 
 
@@ -195,9 +192,9 @@
                     <a class="text-warning" href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
+            {{-- <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Footer End -->
@@ -216,8 +213,8 @@
     <script src="{{asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="{{asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
-    <script src="{{asset('user/mail/contact.js')}}"></script>
+    {{-- <script src="{{asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
+    <script src="{{asset('user/mail/contact.js')}}"></script> --}}
 
 
     <!-- Template Javascript -->

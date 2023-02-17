@@ -38,19 +38,21 @@
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
-                    <input type="text" class="form-control bg-secondary border-0 text-center" value="1" id="inputCart">
+                    <input type="text" class="form-control bg-secondary border-0 text-center" value="1" id="numberOfCart">
                     <div class="input-group-btn">
                         <button class="btn btn-warning  btn-plus">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
                 </div>
-                <input type="hidden" value="{{Auth::user()->id}}" id="userId">
-                <input type="hidden" value="{{$productDetail->id}}" id="productId">
-                {{-- <a href="{{route('user#addCart')}}"> --}}
+
+
+                    <input type="hidden" value="{{Auth::user()->id}}" id='userId'>
+                    <input type="hidden" value="{{$productDetail->id}}" id="productId">
+
                     {{-- ajax is not need id and route --}}
                     <button type="button" class="btn btn-warning  px-3" id="addCartBtn"><i class="fa fa-shopping-cart mr-1" ></i> Add To Cart</button>
-                {{-- </a> --}}
+
             </div>
             <div class="d-flex pt-2">
                 <strong class="text-dark mr-2">Share on:</strong>
@@ -91,7 +93,7 @@
                             <div class="col-md-6">
                                 <h4 class="mb-4">1 review for "Product Name"</h4>
                                 <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    {{-- <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;"> --}}
                                     <div class="media-body">
                                         <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
                                         <div class="text-warning  mb-2">
@@ -189,33 +191,67 @@
 
 @section('scriptSourse')
 
+{{-- <script>
+    // $(document).ready(function(){
+    //     $('#addCartBtn').click(function(){
+
+
+    //        $source ={
+    //             'count' : $('#inputCart').val(),
+    //             'userId' : $('#userId').val(),
+    //             'productId' :$('#productId').val()
+    //       }
+
+    //       console.log($source);
+
+    //         $.ajax({
+    //             type : 'get',
+    //             url :'http://127.0.0.1:8000/user/ajax/addCart',
+    //             data : $source,
+    //             dataType :'json',
+
+    //             success:function(response){
+    //                 if(response.status == 'success'){
+    //                     window.location.href ="http://127.0.0.1:8000/user/home"
+    //                 }
+
+    //             }
+
+
+    //         })
+    //     })
+    // })
+
+
+
+</script> --}}
+
 <script>
     $(document).ready(function(){
+
+
+
+
+
         $('#addCartBtn').click(function(){
 
+            let idData ={
+            'count' :   $('#numberOfCart').val(),
+            'userId' :  $('#userId').val(),
+            'productId' :$('#productId').val()
+        }
 
-           $source ={
-                'count' : $('#inputCart').val(),
-                'userId' : $('#userId').val(),
-                'productId' :$('#productId').val()
-          }
-
-          console.log($source);
 
             $.ajax({
-                type : 'get',
-                url :'http://127.0.0.1:8000/user/ajax/addCart',
-                data : $source,
-                dataType :'json',
-
-                success:function(response){
+                type :'get',
+                data : idData,
+                url : 'http://127.0.0.1:8000/user/ajax/addCart',
+                dataType: 'json',
+                success:function(response){ // return response()->json() result is in here! in (response)
                     if(response.status == 'success'){
                         window.location.href ="http://127.0.0.1:8000/user/home"
                     }
-
                 }
-
-
             })
         })
     })

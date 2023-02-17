@@ -52,6 +52,10 @@
                         <div>
                             <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
                             <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                            <a href="{{route('user#addCartPage',Auth::user()->id)}}" class="btn px-0 ml-3">
+                                <i class="fas fa-shopping-cart "></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{count($cart)}}</span>
+                            </a>
                         </div>
                         <div class="ml-2">
                             <div class="btn-group">

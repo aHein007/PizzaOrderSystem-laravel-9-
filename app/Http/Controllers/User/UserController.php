@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,10 +18,10 @@ class UserController extends Controller
 
         $category =Category::get();
 
+        $cart =Cart::where('user_id',Auth::user()->id)->get(); // this is important!
 
 
-
-        return view('myViews.user.home',compact('pizza','category'));
+        return view('myViews.user.home',compact('pizza','category','cart'));
     }
 
     public function filterProcess($id)
@@ -28,7 +30,9 @@ class UserController extends Controller
 
      $category =Category::get();
 
-     return view('myViews.user.home',compact('pizza','category'));
+     $cart =Cart::where('user_id',Auth::user()->id)->get();
+
+     return view('myViews.user.home',compact('pizza','category','cart'));
 
 
     }
@@ -42,5 +46,5 @@ class UserController extends Controller
         return view("myViews.user.productDetail",compact('productDetail','pizzaList'));
     }
 
-    
+
 }

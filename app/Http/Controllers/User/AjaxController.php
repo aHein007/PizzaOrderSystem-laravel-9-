@@ -28,26 +28,31 @@ class AjaxController extends Controller
     public function addCart(Request $request)
     {
 
-      $orderData =  $this->getOrderData($request);
+       $orderData =$this->getOrderData($request);
+
+
         Cart::create($orderData);
 
         $response = [
-            'status' => 'success',
-            'message' => 'Add to cart complete!'
+            'message' => 'Add to cart product successfully!',
+            'status' => 'success'
         ];
 
-        return response()->json($response,200);// this is important
+        return response()->json($response,200); // this is important
+
+
+
 
     }
 
-    private function getOrderData($request)
-    {
+
+    private function getOrderData($request){
         return [
             'user_id' =>$request->userId,
-            'product_id' =>$request->productId,
             'qty' =>$request->count,
-            'created_at'=>Carbon::now(),
-            'updated_at'=>Carbon::now()
+            'product_id' =>$request->productId
         ];
     }
+
+
 }
