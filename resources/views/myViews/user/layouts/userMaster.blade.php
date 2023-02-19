@@ -83,7 +83,7 @@
                                         <div class="text-white "> {{Auth::user()->name}}</div>
 
                                 </a>
-
+                                <img src="{{asset('storage/'.Auth::user()->image)}}" alt=""  style="height: 50px" class="  " >
                                 <ul class="dropdown-menu rounded">
                                   <li><a class="dropdown-item" href="{{route('user#profilePage',Auth::user()->id)}}"><i class="fa-solid fa-user  p-2"></i> My Account</a></li>
                                   <li><a class="dropdown-item" href="{{route('user#passwordPage')}}"><i class="fa-solid fa-key p-2 "></i> Passwowrd</a></li>

@@ -94,10 +94,12 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
    //filter category
    Route::get('category/filter/{id}',[UserController::class,'filterProcess'])->name('users#filterProcess');
 
-   //ajax method route
+   //ajax method route // cart process
    Route::prefix('ajax')->group(function(){ //this is important code
       Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#pizzaList');
       Route::get('addCart',[AjaxController::class,'addCart'])->name('user#addCart');
+      //order process
+      Route::get('order',[AjaxController::class,'order'])->name('user#order');
    });
 
    //user profile

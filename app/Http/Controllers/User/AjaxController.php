@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\Product;
 use Carbon\Carbon;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -43,6 +46,43 @@ class AjaxController extends Controller
 
 
 
+    }
+
+    public function order(Request $request)
+    {
+        $total = 0;
+       foreach ($request->all() as $item) {
+        $orderList = OrderList::create([
+            'user_id' => $item['user_id'],
+            'product_id' =>$item['product_id'],
+            'order_code' =>$item['order_code'],
+            'qty' =>$item['qty'],
+            'total' =>$item['total'],
+
+        ]);
+
+        $total +=$orderList->total; /// add for total Price
+    }
+
+        logger($orderList->total);
+        Cart::where('user_id',Auth::user()->id)->delete();
+
+        Order::create([
+            'user_id' => Auth::user()->id,
+            'order_code' =>$orderList->order_code,
+            'total-price' =>$total + 3000
+
+        ]);
+
+       $response = [
+        'message' => 'Order Create Successfully!',
+        'status' => 'success'
+        ];
+
+
+
+
+       return response()->json($response,200);
     }
 
 

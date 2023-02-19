@@ -18,8 +18,11 @@
                 </thead>
                 <tbody class="align-middle" id="tableBody">
                   @foreach ($cartList as $cart)
+
                   <tr>
                     <td><img src="{{asset('storage/productImage/'. $cart->image)}}" alt="" style="width: 50px;"></td>
+                    <input type="hidden" value="{{$cart->user_id}}" id='userId'>
+                    <input type="hidden" value="{{$cart->product_id}}" id='productId'>
                     <td class="align-middle">{{$cart->name}}</td>
                     <td class="align-middle" id="price">{{$cart->price}} kyats</td>
                     <td class="align-middle">
@@ -66,7 +69,7 @@
                         <h5>Total</h5>
                         <h5 id='finalTotal'>{{$totalPrice + 3000}} kyats</h5>
                     </div>
-                    <button class="btn btn-block btn-warning font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    <button class="btn btn-block btn-warning font-weight-bold my-3 py-3" id="checkout">Proceed To Checkout</button>
                 </div>
             </div>
         </div>
@@ -76,4 +79,38 @@
 
 @section('scriptSourse')
     <script src="{{asset('js/cart.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $orderList =[];
+
+            $('#checkout').click(function(){
+                $("#tableBody tr").each(function(index,row){
+                    $orderList.push({
+                        'user_id' : $(row).find('#userId').val(),
+                        'product_id' :$(row).find('#productId').val(),
+                        'qty' :$(row).find('#qty').val(),
+                        'total' :$(row).find('#total').text().replace('kyats','') * 1,
+                        'order_code' : 'Ps' + Math.floor(Math.random() * 100000000000)
+                    })
+                })
+
+                $.ajax({
+                    type:'get',
+                    data:Object.assign({},$orderList),
+                    url:'http://127.0.0.1:8000/user/ajax/order',
+                    dataType:'json',
+                    success:function(response){
+                      if(response.status =="success"){
+                        window.location.href ='http://127.0.0.1:8000/user/home'
+                      }
+                    }
+                })
+
+
+
+            })
+        })
+    </script>
 @endsection
