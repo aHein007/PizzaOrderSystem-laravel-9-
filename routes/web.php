@@ -88,6 +88,7 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
    Route::prefix('pizza')->group(function(){
         Route::get('detail/{id}',[UserController::class,'detailPage'])->name('user#detailPage');
         Route::get('addCartPage/{id}',[CartController::class,'addCartPage'])->name('user#addCartPage');
+        Route::get('historyPage',[UserController::class,'historyPage'])->name('user#history');
 
    });
 

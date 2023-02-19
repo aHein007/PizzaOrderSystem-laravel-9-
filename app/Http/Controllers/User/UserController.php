@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,10 @@ class UserController extends Controller
 
         $cart =Cart::where('user_id',Auth::user()->id)->get(); // this is important!
 
+        $orderHistory =Order::get();
 
-        return view('myViews.user.home',compact('pizza','category','cart'));
+
+        return view('myViews.user.home',compact('pizza','category','cart','orderHistory'));
     }
 
     public function filterProcess($id)
@@ -32,9 +35,16 @@ class UserController extends Controller
 
      $cart =Cart::where('user_id',Auth::user()->id)->get();
 
-     return view('myViews.user.home',compact('pizza','category','cart'));
+     $orderHistory =Order::get();
+
+     return view('myViews.user.home',compact('pizza','category','cart','orderHistory'));
 
 
+    }
+
+    public function historyPage(){
+        $orderList =Order::where('user_id',Auth::user()->id)->paginate(8);
+         return view('myViews.user.history',compact('orderList'));
     }
 
     public function detailPage($id){

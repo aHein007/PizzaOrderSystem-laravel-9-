@@ -64,13 +64,13 @@ class AjaxController extends Controller
         $total +=$orderList->total; /// add for total Price
     }
 
-        logger($orderList->total);
+
         Cart::where('user_id',Auth::user()->id)->delete();
 
         Order::create([
             'user_id' => Auth::user()->id,
             'order_code' =>$orderList->order_code,
-            'total-price' =>$total + 3000
+            'total_price' =>$total + 3000
 
         ]);
 

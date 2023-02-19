@@ -15,6 +15,7 @@
                         <span class="badge font-weight-normal text-dark">{{count($category)}}</span>
                     </div>
 
+
                     <hr class="text-muted">
 
                     @foreach ($category as $items )
@@ -56,6 +57,18 @@
                                 <i class="fas fa-shopping-cart "></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{count($cart)}}</span>
                             </a>
+
+                            <a href="{{route('user#history')}}" class="btn px-0 ml-3">
+                                <button type="button" class="btn btn-outline-dark btn-sm position-relative">
+                                    History  <i class="fa fa-history" aria-hidden="true"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                      {{count($orderHistory)}}
+                                      <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                  </button>
+                            </a>
+
+
                         </div>
                         <div class="ml-2">
                             <div class="btn-group">

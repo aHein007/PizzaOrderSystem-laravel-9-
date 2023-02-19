@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id');
             $table->integer('user_id');
             $table->longText('order_code');
-            $table->string('total-price');
+            $table->string('total_price');
             $table->integer('status')->default(0); // 0->pending 1->success 2->reject
             $table->timestamps();
         });
