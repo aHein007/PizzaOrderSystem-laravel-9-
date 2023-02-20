@@ -1,5 +1,5 @@
 $(document).ready(function(){// this is important code
-    
+
     $('.btn-plus').click(function(){
       $parentNode = $(this).parents("tr");// to find parent div
       $price = Number($parentNode.find('#price').text().replace("kyats","")); // and find id
@@ -29,14 +29,7 @@ $(document).ready(function(){// this is important code
 
     })
 
-    $('.removeBtn').click(function(){
-
-        $parent =$(this).parents('tr')
-
-        $parent.remove();
-
-        total()
-    })
+  
 
     let  total=()=>
     {

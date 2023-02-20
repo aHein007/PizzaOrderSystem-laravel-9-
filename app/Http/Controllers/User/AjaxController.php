@@ -85,6 +85,26 @@ class AjaxController extends Controller
        return response()->json($response,200);
     }
 
+    public function clearCart(){
+        Cart::where('user_id',Auth::user()->id)->delete();
+
+        return response()->json([
+            'message' =>'delete success',
+            'status' => 'deleted'
+        ],200);
+    }
+
+    public function clearByOne(Request $request){
+
+        $id =$request->productId;
+
+         Cart::where('user_id',Auth::user()->id)->where('product_id',$id)
+                                               ->where('id',$request->cartId)
+                                               ->delete();
+
+
+    }
+
 
     private function getOrderData($request){
         return [

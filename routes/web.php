@@ -101,6 +101,8 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
       Route::get('addCart',[AjaxController::class,'addCart'])->name('user#addCart');
       //order process
       Route::get('order',[AjaxController::class,'order'])->name('user#order');
+      Route::get('clearCart',[AjaxController::class,'clearCart'])->name('user#clearCart');
+      Route::get('clearOneCart',[AjaxController::class,'clearByOne'])->name('user#clearByOne');
    });
 
    //user profile
