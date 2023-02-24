@@ -21,7 +21,7 @@ class UserController extends Controller
 
         $cart =Cart::where('user_id',Auth::user()->id)->get(); // this is important!
 
-        $orderHistory =Order::get();
+        $orderHistory =Order::where('user_id',Auth::user()->id)->get();
 
 
         return view('myViews.user.home',compact('pizza','category','cart','orderHistory'));
@@ -35,7 +35,7 @@ class UserController extends Controller
 
      $cart =Cart::where('user_id',Auth::user()->id)->get();
 
-     $orderHistory =Order::get();
+     $orderHistory =Order::where('user_id',Auth::user()->id)->get();
 
      return view('myViews.user.home',compact('pizza','category','cart','orderHistory'));
 

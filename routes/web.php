@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserController;
@@ -54,6 +55,13 @@ Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
         //password
         Route::get('passwordPage',[AdminController::class,'passwordPage'])->name('admin#passwordPage');
         Route::post('passwordPage/change',[AdminController::class,'changePassword'])->name('admin#changePassword');
+
+        Route::prefix('order')->group(function(){
+            Route::get('page',[OrderController::class,'orderPage'])->name('admin#orderPage');
+            Route::post('change/status',[OrderController::class,'changeSorting'])->name('admin#sorting');
+            Route::get('ajax/changeStatus',[OrderController::class,'changeStatus'])->name('admin#changeStatus');
+            Route::get('orderDetail/{code}',[OrderController::class,'orderDetail'])->name('admin#orderDetail');
+        });
     });
 
    //admin

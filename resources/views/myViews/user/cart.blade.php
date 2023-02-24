@@ -70,7 +70,7 @@
                         <h5>Total</h5>
                         <h5 id='finalTotal'>{{$totalPrice + 3000}} kyats</h5>
                     </div>
-                    <button class="btn btn-block btn-warning font-weight-bold my-3 py-3" id="checkout">Proceed To Checkout</button>
+                    <button class="btn btn-block btn-warning font-weight-bold my-3 py-3 checkout"  id="">Proceed To Checkout</button>
                     <button class="btn btn-block btn-danger font-weight-bold my-3 py-3" id="clearBtn">All Clear Carts!</button>
                 </div>
             </div>
@@ -85,16 +85,20 @@
     <script>
         $(document).ready(function(){
 
-            $orderList =[];
 
-            $('#checkout').click(function(){
+
+            $('.checkout').click(function(){
+                 $orderList =[];
+
+                  $random =Math.floor(Math.random() *  100000000000);// this is very important! order code is declare when (looping & push) methods is done!
+
                 $("#tableBody tr").each(function(index,row){
                     $orderList.push({
                         'user_id' : $(row).find('#userId').val(),
                         'product_id' :$(row).find('#productId').val(),
                         'qty' :$(row).find('#qty').val(),
                         'total' :$(row).find('#total').text().replace('kyats','') * 1,
-                        'order_code' : 'Ps' + Math.floor(Math.random() * 100000000000)
+                        'order_code' : 'Ps' + $random
                     })
                 })
 

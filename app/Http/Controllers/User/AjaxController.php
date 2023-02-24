@@ -50,6 +50,7 @@ class AjaxController extends Controller
 
     public function order(Request $request)
     {
+     
         $total = 0;
        foreach ($request->all() as $item) {
         $orderList = OrderList::create([
@@ -61,7 +62,7 @@ class AjaxController extends Controller
 
         ]);
 
-        $total +=$orderList->total; /// add for total Price
+        $total +=$orderList->total; // add for total Price
     }
 
 
@@ -82,7 +83,7 @@ class AjaxController extends Controller
 
 
 
-       return response()->json($response,200);
+     return response()->json($response,200);
     }
 
     public function clearCart(){

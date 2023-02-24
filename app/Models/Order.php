@@ -16,4 +16,13 @@ class Order extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function scopesearchOrder($query,$data){
+        $query->when($data ,function($query ,$search){
+            $query->orWhere('users.name','like',"%".$search."%")
+                  ->orWhere('orders.total_price','like',"%".$search."%")
+                  ->orWhere('orders.order_code','like','%'.$search.'%')
+                  ->get();
+        });
+    }
 }
