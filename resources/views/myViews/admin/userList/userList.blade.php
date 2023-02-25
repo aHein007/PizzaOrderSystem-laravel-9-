@@ -11,7 +11,7 @@
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Admin List</h2>
+                            <h2 class="title-1">User List</h2>
 
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                             <i class="zmdi zmdi-search"></i>
                         </button>
                     </form>
-                   
+
 
 
                 </div>
@@ -75,79 +75,92 @@
                                 <th>Gender</th>
                                 <th>Phone</th>
                                 <th>Address</th>
-                                <th></th>
+                                <th>Role</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="listBody">
+                            @foreach ($userList as $user)
 
-                        @if (count($adminData) != 0)
-                            @foreach ($adminData as $data)
+                            <tr class="tr-shadow">
+                                <input type="hidden" id="userId" value="{{$user->id}}">
+                                @if ($user->image != null)
+                                    <td>
+                                        <img src="{{asset('storage/' . $user->image)}}" class=" img-thumbnail " width="140px" style="height: 180px">
 
-                               <tr class="tr-shadow">
-                                  @if ($data->image != null)
-                                  <td>
-                                       <img src="{{asset('storage/' . $data->image)}}" alt="" width="100px">
                                     </td>
-                                  @elseif($data->gender == 'female')
-                                  <td>
-                                       <img src="{{asset('image/default_female.jpg'  )}}" alt="" width="100px">
-                                   </td>
-                                   @else
-                                   <td>
-                                       <img src="{{asset('image/default_image.jpg'  )}}" alt="" width="100px">
-                                   </td>
-                                  @endif
-                                   <td>{{$data->name}}</td>
-                                   <td>{{$data->email}}</td>
-                                   <td>{{$data->gender}}</td>
-                                   <td>{{$data->phone}}</td>
-                                   <td>{{$data->address}}</td>
 
-                                   <td>
-                                       <div class="table-data-feature ">
+                                    @elseif($user->gender == 'female')
+                                    <td>
+                                        <img src="{{asset('image/default_female.jpg')}}" alt="" width="300px" style="height: 180px">
+                                    </td>
+                                    @else
+                                    <td>
+                                        <img src="{{asset('image/default_image.jpg')}}" alt="" width="300px" style="height: 180px">
+                                    </td>
+                                @endif
 
-                                               <div class="">
-                                                  <a href="{{route('admin#changeRolePage',$data->id)}}">
-                                                       <button  class="item me-2" @if(Auth::user()->id == $data->id) hidden @endif  data-toggle="tooltip" data-placement="top" title="Change Role">
-                                                           <i class="fa-solid fa-user-minus fs-6 text-center"></i>
-                                                       </button>
-                                                  </a>
-                                               </div>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->gender}}</td>
+                                <td>{{$user->phone}}</td>
+                                <td>{{$user->address}}</td>
+                                <td >
+                                    <select name="changeRole" id="role" class="form-select change" style="width: 100px">
 
-                                              <form action="{{route('admin#adminDelete',$data->id)}}" method="post">
-                                               @csrf
-                                               @method('delete')
-                                               {{--လက်ရှိ login  ဝင် ထား တဲ့ id (Auth::user()->id) နှင့် အခု ရှိ နေ တဲ့  id တေ ($data->id) ထဲ က id နဲ့ တူ ရင် --}}
-                                                   <button type="submit" class="item" @if(Auth::user()->id == $data->id) hidden @endif data-toggle="tooltip" data-placement="top" title="Delete">
-                                                       <i class="zmdi zmdi-delete "></i>
-                                                   </button>
-                                              </form>
+                                        <option value="admin" @if($user->role == 'user') selected @endif>Admin</option>
+                                        <option value="user"  @if($user->role == 'user') selected @endif>User</option>
+                                    </select>
+                                </td>
+
+                                <td></td>
+                            </tr>
 
 
-                                       </div>
-                                   </td>
-                               </tr>
-                           @endforeach
 
-                                <tr class="spacer"></tr>
-                                <tr class="tr-shadow">
-
-
-                        @else
-                                    <tr>
-                                        <td colspan="7" ><h4 class="text-muted">There is no data!</h4></td>
-                                    </tr>
-
-                        @endif
+                            @endforeach
+                            <tr class="spacer"></tr>
+                             <tr class="tr-shadow"></tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- END DATA TABLE -->
                <div class="mt-4">
-                    {{$adminData->links()}}
+
                </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@section('JavaScriptTag')
+    <script>
+        $(document).ready(function(){
+            $('.change').change(function(){
+
+              $parentNode = $(this).parents("#listBody tr"); // this is all important code !
+               $value = $(this).val();
+              $userId =  $parentNode.find('#userId').val();
+
+
+
+               $.ajax({
+                type :'get',
+                data:{'value':$value,'userId':$userId},
+                url:'http://127.0.0.1:8000/adminListInUser/changeAdmin',
+                dataType:'json',
+                success:function(response){
+                    console.log(response.status);
+                }
+            })
+
+            location.reload();
+
+            })
+
+
+        })
+    </script>
+@endsection
+
+

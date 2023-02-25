@@ -57,11 +57,7 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar ">
                     <ul class="list-unstyled navbar__list">
-                        {{-- <li class="active has-sub">
-                          <a href="{{route('admin#listPage')}}">
-                                <i class="fas fa-chart-bar"></i>Category
-                            </a>
-                        </li> --}}
+
                         <li>
                             <a href="{{route('admin#listPage')}}" class="text-decoration-none">
                                 <i class="fas fa-chart-bar"></i>Category
@@ -76,6 +72,12 @@
                         <li>
                             <a href="{{route('admin#orderPage')}}" class="text-decoration-none">
                                 <i class="fa-solid fa-truck-fast"></i>Order</a>
+                        </li>
+
+                         <li >
+                          <a href="{{route('admin#adminListInUser')}}" class="text-decoration-none">
+                            <i class="fa-solid fa-user"></i>User
+                            </a>
                         </li>
                     </ul>
                 </nav>

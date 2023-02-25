@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\AdminListInUser;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
@@ -87,6 +88,10 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
     Route::get('/detailPage/{id}',[ProductController::class,'detailPage'])->name('admin#detailPage');
 });
 
+Route::prefix('adminListInUser')->group(function(){
+    Route::get('/listPage',[AdminListInUser::class,'listPage'])->name('admin#adminListInUser');
+    Route::get('/changeAdmin',[AdminListInUser::class,'changeAdmin'])->name('admin#changeAdmin');
+});
 
  //user
  Route::group(['prefix' => 'user','middleware' =>'user_auth'],function(){
