@@ -27,7 +27,7 @@
                     <small class="fas fa-star-half-alt"></small>
                     <small class="far fa-star"></small>
                 </div>
-                <small class="pt-1">(99 Reviews)</small>
+                <small class="pt-1">({{$productDetail->view_count + 1}} Viewers)</small>
             </div>
             <h3 class="font-weight-semi-bold mb-4">{{$productDetail->price}} kyats</h3>
             <p class="mb-4">{{$productDetail->description}}</p>
@@ -229,10 +229,18 @@
 <script>
     $(document).ready(function(){
 
+      //count view
+        $.ajax({
+            type:'get',
+            data:{'productId':$('#productId').val()},
+            url:'http://127.0.0.1:8000/user/ajax/countView',
+            dataType:'json',
+            success:function(response){
+                console.log(response);
+            }
+        })
 
-
-
-
+        //add button
         $('#addCartBtn').click(function(){
 
             let idData ={

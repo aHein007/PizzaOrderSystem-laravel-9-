@@ -109,9 +109,10 @@ Route::prefix('adminListInUser')->group(function(){
    Route::get('category/filter/{id}',[UserController::class,'filterProcess'])->name('users#filterProcess');
 
    //ajax method route // cart process
-   Route::prefix('ajax')->group(function(){ //this is important code
+        Route::prefix('ajax')->group(function(){ //this is important code
       Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('user#pizzaList');
       Route::get('addCart',[AjaxController::class,'addCart'])->name('user#addCart');
+      Route::get('countView',[AjaxController::class,'countView'])->name('user#countView');
       //order process
       Route::get('order',[AjaxController::class,'order'])->name('user#order');
       Route::get('clearCart',[AjaxController::class,'clearCart'])->name('user#clearCart');

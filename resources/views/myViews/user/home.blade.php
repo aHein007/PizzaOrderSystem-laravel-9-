@@ -93,9 +93,7 @@
                             <img class="img-fluid w-100 " style="height: 250px" src="{{asset('storage/productImage/' . $items->image)}}" alt="" >
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-
-                                {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a> --}}
-                                <a class="btn btn-outline-dark btn-square" href="{{route('user#detailPage',$items->id)}}"><i class="fa-solid fa-circle-info"></i></a>
+                                <a class="btn btn-outline-dark btn-square view-count" href="{{route('user#detailPage',$items->id)}}"><i class="fa-solid fa-circle-info"></i></a>
                             </div>
                         </div>
 
@@ -147,7 +145,7 @@
                                 <img class="img-fluid w-100" style='height:230px' src="{{asset('storage/productImage/${response[i].image}')}}" alt="" >
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+
 
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
                                 </div>
@@ -190,7 +188,7 @@
                                 <img class="img-fluid w-100" style='height:230px' src="{{asset('storage/productImage/${response[i].image}')}}" alt="" >
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+
 
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
                                 </div>
@@ -219,7 +217,10 @@
             }
         })
 
+       
+
         });
     </script>
 @endsection
+
 

@@ -50,7 +50,7 @@ class AjaxController extends Controller
 
     public function order(Request $request)
     {
-     
+
         $total = 0;
        foreach ($request->all() as $item) {
         $orderList = OrderList::create([
@@ -104,6 +104,20 @@ class AjaxController extends Controller
                                                ->delete();
 
 
+    }
+
+    //count view
+    public function countView(Request $request){
+        $productId =$request->productId;
+
+
+       $pizza= Product::where('id',$productId)->first();
+
+        $viewCount =[
+            'view_count' => $pizza->view_count + 1
+        ];
+
+        Product::where('id',$productId)->update($viewCount);
     }
 
 
