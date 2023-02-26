@@ -38,7 +38,7 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-warning bg-dark px-2">CODE LAB</span>
+                    <span class="h1 text-uppercase text-warning bg-dark px-2">The Heaven</span>
                     <span class="h1 text-uppercase text-dark bg-warning px-2 ml-n1">Shop</span>
                 </a>
             </div>
@@ -65,8 +65,8 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mr-auto  py-0">
                             <a href="{{route('user#home')}}" class="nav-item nav-link active">Home</a>
-                            <a href="cart.html" class="nav-item nav-link">My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{route('user#addCartPage',Auth::user()->id)}}" class="nav-item nav-link">My Cart</a>
+                            <a href="{{route('user#contactPage')}}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto float-end py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -83,7 +83,13 @@
                                         <div class="text-white "> {{Auth::user()->name}}</div>
 
                                 </a>
-                                <img src="{{asset('storage/'.Auth::user()->image)}}" alt=""  style="height: 50px" class="  " >
+                               @if (Auth::user()->image != null)
+                               <img src="{{asset('storage/'.Auth::user()->image)}}" alt=""  style="height: 50px" class=" img-thumbnail" >
+                               @elseif (Auth::user()->gender == 'female')
+                               <img src="{{asset('image/default_female.jpg')}}" alt=""  style="height: 50px" class=" img-thumbnail">
+                               @else
+                               <img src="{{asset('image/default_image.jpg')}}" alt="" class=" img-thumbnail" style="height: 50px">
+                               @endif
                                 <ul class="dropdown-menu rounded">
                                   <li><a class="dropdown-item" href="{{route('user#profilePage',Auth::user()->id)}}"><i class="fa-solid fa-user  p-2"></i> My Account</a></li>
                                   <li><a class="dropdown-item" href="{{route('user#passwordPage')}}"><i class="fa-solid fa-key p-2 "></i> Passwowrd</a></li>
@@ -108,7 +114,7 @@
     <!-- Navbar End -->
 
 
-    <!-- Breadcrumb Start -->
+    {{-- <!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-12">
@@ -120,7 +126,7 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
+    <!-- Breadcrumb End --> --}}
 
 
     <!-- Shop Start -->

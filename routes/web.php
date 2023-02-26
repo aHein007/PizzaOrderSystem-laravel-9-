@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\AdminListInUser;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\AjaxController;
@@ -50,8 +51,7 @@ Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
         //admin list
         Route::get('/adminListPage',[AdminController::class,'adminListPage'])->name('admin#adminListPage');
         Route::delete('/delete/{id}',[AdminController::class,'adminDelete'])->name('admin#adminDelete');
-        Route::get('/changeRole/{id}',[AdminController::class,'changeRolePage'])->name('admin#changeRolePage');
-        Route::post('/changeRole/update/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
+        Route::get('/changeRole',[AjaxController::class,'changeRole'])->name('admin#changeRolePage');
 
         //password
         Route::get('passwordPage',[AdminController::class,'passwordPage'])->name('admin#passwordPage');
@@ -62,6 +62,12 @@ Route::group(['prefix' => 'admin',['middleware'=>'admin_auth']],function(){
             Route::post('change/status',[OrderController::class,'changeSorting'])->name('admin#sorting');
             Route::get('ajax/changeStatus',[OrderController::class,'changeStatus'])->name('admin#changeStatus');
             Route::get('orderDetail/{code}',[OrderController::class,'orderDetail'])->name('admin#orderDetail');
+        });
+
+
+        Route::prefix('contact')->group(function(){
+            Route::get('/page',[ContactController::class,'contactPage'])->name('admin#contactPage');
+
         });
     });
 
@@ -91,6 +97,7 @@ Route::group(['prefix'=>'product','middleware' => 'admin_auth'],function(){
 Route::prefix('adminListInUser')->group(function(){
     Route::get('/listPage',[AdminListInUser::class,'listPage'])->name('admin#adminListInUser');
     Route::get('/changeAdmin',[AdminListInUser::class,'changeAdmin'])->name('admin#changeAdmin');
+    Route::delete('/deleteUser/{id}',[AdminController::class,'deleteUser'])->name('admin#userDelete');
 });
 
  //user
@@ -129,6 +136,11 @@ Route::prefix('adminListInUser')->group(function(){
    Route::prefix('password')->group(function(){
         Route::get('passwordPage',[UserPasswordController::class,'passwordPage'])->name('user#passwordPage');
         Route::post('changePassword/{id}',[UserPasswordController::class,'passwordChange'])->name('user#passwordChange');
+   });
+
+   Route::prefix('userContact')->group(function(){
+    Route::get('/page',[ContactController::class,'contact'])->name('user#contactPage');
+    Route::post('/contact/{id}',[ContactController::class,'sendContact'])->name('user#sendContact');
    });
  });
 });

@@ -38,7 +38,9 @@
             <!-- Size Start -->
 
             <div class="">
-                <button class="btn btn btn-warning w-100">Order</button>
+                <a href="{{route('user#addCartPage',Auth::user()->id)}}">
+                    <button class="btn btn btn-warning w-100">Order</button>
+                </a>
             </div>
             <!-- Size End -->
         </div>
@@ -217,7 +219,7 @@
             }
         })
 
-       
+
 
         });
     </script>

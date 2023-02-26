@@ -22,7 +22,7 @@
                             <i class="zmdi zmdi-search"></i>
                         </button>
                     </form>
-                   
+
 
 
                 </div>
@@ -78,12 +78,13 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id='tableBody'>
 
                         @if (count($adminData) != 0)
                             @foreach ($adminData as $data)
 
                                <tr class="tr-shadow">
+                                <input type="hidden" value="{{$data->id}}" id="userId">
                                   @if ($data->image != null)
                                   <td>
                                        <img src="{{asset('storage/' . $data->image)}}" alt="" width="100px">
@@ -106,15 +107,15 @@
                                    <td>
                                        <div class="table-data-feature ">
 
-                                               <div class="">
-                                                  <a href="{{route('admin#changeRolePage',$data->id)}}">
-                                                       <button  class="item me-2" @if(Auth::user()->id == $data->id) hidden @endif  data-toggle="tooltip" data-placement="top" title="Change Role">
-                                                           <i class="fa-solid fa-user-minus fs-6 text-center"></i>
-                                                       </button>
-                                                  </a>
+                                               <div class="me-3" >
+                                                 <select name=""  class="form-select changeRole" @if(Auth::user()->id == $data->id) hidden @endif>
+                                                    {{-- changeRole is must be class --}}
+                                                    <option value="admin" @if($data->role == 'admin') selected @endif>Admin</option>
+                                                    <option value="user" @if($data->role == 'user') selected @endif>User</option>
+                                                 </select>
                                                </div>
 
-                                              <form action="{{route('admin#adminDelete',$data->id)}}" method="post">
+                                              <form action="{{route('admin#adminDelete',$data->id)}}" class="mt-1" method="post">
                                                @csrf
                                                @method('delete')
                                                {{--လက်ရှိ login  ဝင် ထား တဲ့ id (Auth::user()->id) နှင့် အခု ရှိ နေ တဲ့  id တေ ($data->id) ထဲ က id နဲ့ တူ ရင် --}}
@@ -150,4 +151,31 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('JavaScriptTag')
+    <script>
+        $(document).ready(function(){
+            $('.changeRole').change(function(){
+
+                $parentNode =$(this).parents('tr');
+                $role = $(this).val();
+                $userId =$parentNode.find('#userId').val();
+
+
+
+               $.ajax({
+                type:'get',
+                data:{'role':$role,'userId':$userId},
+                url:'http://127.0.0.1:8000/admin/changeRole',
+                dataType:'json',
+                success:function(response){
+                    console.log(response);
+                }
+               })
+
+               location.reload();
+            })
+        })
+    </script>
 @endsection

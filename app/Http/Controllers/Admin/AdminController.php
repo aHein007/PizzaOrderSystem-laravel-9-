@@ -132,11 +132,7 @@ class AdminController extends Controller
     }
 
 
-    public function changeRolePage($id)
-    {
-        $account =User::where('id',$id)->first();
-        return view('myViews.admin.adminDetail.changeRole',compact('account'));
-    }
+
 
     public function changeRole(Request $request,$id)
     {
@@ -147,9 +143,11 @@ class AdminController extends Controller
        return redirect()->route('admin#adminListPage');
     }
 
+    public function deleteUser($id){
+        User::where('id',$id)->delete();
 
-
-
+        return back()->with('deleteUser','User account have been delete!');
+    }
 
     public function changePassword(Validation $request)//hash password
     {

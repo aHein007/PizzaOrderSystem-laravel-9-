@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderList;
@@ -118,6 +119,19 @@ class AjaxController extends Controller
         ];
 
         Product::where('id',$productId)->update($viewCount);
+    }
+
+    public function changeRole(Request $request){
+       $userId= $request->userId;
+        $role =  $request->role;
+
+        User::where('id',$userId)->update([
+            'role' =>$role
+        ]);
+
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
 

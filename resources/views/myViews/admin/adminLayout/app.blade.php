@@ -79,6 +79,12 @@
                             <i class="fa-solid fa-user"></i>User
                             </a>
                         </li>
+
+                        <li >
+                            <a href="{{route('admin#contactPage')}}" class="text-decoration-none">
+                                <i class="fa-solid fa-comment-sms"></i>Contact
+                              </a>
+                          </li>
                     </ul>
                 </nav>
             </div>
