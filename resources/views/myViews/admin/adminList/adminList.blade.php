@@ -167,7 +167,7 @@
                $.ajax({
                 type:'get',
                 data:{'role':$role,'userId':$userId},
-                url:'http://127.0.0.1:8000/admin/changeRole',
+                url:'/admin/changeRole',
                 dataType:'json',
                 success:function(response){
                     console.log(response);

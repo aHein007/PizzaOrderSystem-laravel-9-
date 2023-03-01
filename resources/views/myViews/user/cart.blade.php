@@ -105,11 +105,11 @@
                 $.ajax({
                     type:'get',
                     data:Object.assign({},$orderList),
-                    url:'http://127.0.0.1:8000/user/ajax/order',
+                    url:'/user/ajax/order',
                     dataType:'json',
                     success:function(response){
                       if(response.status =="success"){
-                        window.location.href ='http://127.0.0.1:8000/user/home'
+                        window.location.href ='/user/home'
                       }
                     }
                 })
@@ -124,7 +124,7 @@
 
                 $.ajax({
                     type:'get',
-                    url: 'http://127.0.0.1:8000/user/ajax/clearCart',
+                    url: '/user/ajax/clearCart',
                     dataType:'json',
                     success:function(response){
                         console.log(response);
@@ -141,7 +141,7 @@
 
                 $.ajax({
                     'type' :'get',
-                    'url' : 'http://127.0.0.1:8000/user/ajax/clearOneCart',
+                    'url' : '/user/ajax/clearOneCart',
                     'data' : {'productId' : $productId,'cartId':$cartId},
                     'dataType' : 'json',
                     success:function(response){

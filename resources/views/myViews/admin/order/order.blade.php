@@ -201,7 +201,7 @@
 
             $.ajax({
                 type:'get',
-                url:'http://127.0.0.1:8000/admin/order/ajax/changeStatus',
+                url:'/admin/order/ajax/changeStatus',
                 dataType:'json',
                 data:{'orderId':$orderId,'currentState':$currentState},
                 success:function(response){

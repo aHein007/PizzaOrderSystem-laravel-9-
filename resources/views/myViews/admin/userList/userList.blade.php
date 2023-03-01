@@ -166,7 +166,7 @@
                $.ajax({
                 type :'get',
                 data:{'value':$value,'userId':$userId},
-                url:'http://127.0.0.1:8000/adminListInUser/changeAdmin',
+                url:'/adminListInUser/changeAdmin',
                 dataType:'json',
                 success:function(response){
                     console.log(response.status);

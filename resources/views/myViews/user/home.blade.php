@@ -133,7 +133,7 @@
             if(value.val() == "asc"){
                 $.ajax({
                     type:'get',
-                    url:'http://127.0.0.1:8000/user/ajax/pizzaList',
+                    url:'/user/ajax/pizzaList',
                     dataType:'json',
                     data:{'status':'asc'},
                     success:function(response){
@@ -176,7 +176,7 @@
             }else if(value.val() == "desc"){
                 $.ajax({
                     type:'get',
-                    url:'http://127.0.0.1:8000/user/ajax/pizzaList',
+                    url:'/user/ajax/pizzaList',
                     dataType:'json',
                     data:{'status':'decs'},
                     success:function(response){

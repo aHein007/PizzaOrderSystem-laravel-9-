@@ -233,7 +233,7 @@
         $.ajax({
             type:'get',
             data:{'productId':$('#productId').val()},
-            url:'http://127.0.0.1:8000/user/ajax/countView',
+            url:'/user/ajax/countView',
             dataType:'json',
             success:function(response){
                 console.log(response);
@@ -253,11 +253,11 @@
             $.ajax({
                 type :'get',
                 data : idData,
-                url : 'http://127.0.0.1:8000/user/ajax/addCart',
+                url : '/user/ajax/addCart',
                 dataType: 'json',
                 success:function(response){ // return response()->json() result is in here! in (response)
                     if(response.status == 'success'){
-                        window.location.href ="http://127.0.0.1:8000/user/home"
+                        window.location.href ="/user/home"
                     }
                 }
             })
